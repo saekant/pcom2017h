@@ -1,0 +1,31 @@
+1,1,thylakoid_1,60,1
+2,1,thylakoid_2,80,1
+3,1,chloroplast_1 ,60,1
+4,1,chloroplast_2,60,1
+5,1,stroma,60,1
+6,1,leaf(0DAD),53,1
+7,1,senescent leaf (8DAD),53,1
+8,1,senescent leaf (detached),43,1
+9,2,whole cells_2,60,2
+10,1,envelope,68,1
+11,1,chloroplast_3,68,1
+12,1,chloroplast_4,68,1
+13,3,whole cells,68,2
+14,4,whole cells,48,2
+15,5,whole cells,48,2
+16,6,whole cells,48,2
+17,7,whole cells,68,2
+18,1,mitochondria,68,1
+19,2,whole cells_1,80,1
+20,8,whole cells,68,2
+21,1,AP1,60,1
+22,2,plasma membranes,60,1
+23,9,whole cells,68,2
+24,10,whole cells (normal medium),60,1
+25,1,thylakoid (digitonin-mild),8,1
+26,1,thylakoid (digitonin-strong),7,1
+27,10,whole cells (Nickel-limited medium),60,1
+28,11,whole cells,53,1
+29,12,whole cells,43,1
+30,13,whole cells,64,1
+31,1,thylakoid (digitonin-strong2),61,1

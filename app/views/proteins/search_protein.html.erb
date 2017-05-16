@@ -1,0 +1,398 @@
+		<div id='view'>
+		 <h1><%= @title %></h1>
+	<%if @protein.nil? %>
+			<div class="posttext">
+		  		<p>The query was not found in the genome database. Try another query.</p>
+		  	</div>
+	<% else %>		
+			<div class="posttext">
+				<p>symbols      : <%= @protein.symbols.tr('#',',') %></p>
+				<p>	description :<%= @protein.description.tr('#',',') %></p>
+			</div>
+
+			<table class="legend_table">
+				<tr>
+					<td class="blank"></td>
+					<td class="level0">0</td>
+					<td class="level1">low</td>
+					<td class="level2">middle</td>
+					<td class="level3">high</td>
+				</tr>
+			</table>
+
+
+		<%if @organism == 1 %>
+			
+			
+		<table class="mas_table" >
+				<tr>
+					<%if @results3_exists == true %>
+						<td class="material_name">
+							<%=link_to("chloroplast ",{ :controller => "proteins",:action => "getchart",:material_id => "3",:main_gene_id =>@title,:gene_id_str => "",:class=> "widelink" ,:mode => "1"}) %>
+						</td>
+						<% @msresults3.each do |result| %>
+
+							<%if result == "0" %>
+								<td class="gel60_level0"></td>
+							<% elsif result == "1" %>
+								<td class="gel60_level1"></td>
+							<% elsif result == "2" %>
+								<td class="gel60_level2"></td>
+							<% elsif result == "3" %>
+								<td class="gel60_level3"></td>
+							<% end %>
+
+						<% end %>
+
+					<% else %>
+						<td class="material_name">chloroplast    :   no data</td>
+					<% end %>
+				</tr>
+			</table>
+			
+		<table class="mas_table" >
+				<tr>
+					<%if @results4_exists == true %>
+						<td class="material_name">
+							<%=link_to("chloroplast  2",{ :controller => "proteins",:action => "getchart",:material_id => "4",:main_gene_id =>@title,:gene_id_str => "",:class=> "widelink" ,:mode => "1"}) %>
+						</td>
+						<% @msresults4.each do |result| %>
+
+							<%if result == "0" %>
+								<td class="gel60_level0"></td>
+							<% elsif result == "1" %>
+								<td class="gel60_level1"></td>
+							<% elsif result == "2" %>
+								<td class="gel60_level2"></td>
+							<% elsif result == "3" %>
+								<td class="gel60_level3"></td>
+							<% end %>
+						<% end %>
+					<% else %>
+						<td class="material_name">chloroplast  2:   no data</td>
+					<% end %>
+				</tr>
+			</table>
+
+			
+			<table class="mas_table" >
+				<tr>
+					<%if @results18_exists == true %>
+						<td class="material_name">
+							<%=link_to("mitochondria",{ :controller => "proteins",:action => "getchart",:material_id => "18",:main_gene_id =>@title,:gene_id_str => "",:class=> "widelink" ,:mode => "1"}) %>
+						</td>
+						<% @msresults18.each do |result| %>
+
+							<%if result == "0" %>
+								<td class="gel68_level0"></td>
+							<% elsif result == "1" %>
+								<td class="gel68_level1"></td>
+							<% elsif result == "2" %>
+								<td class="gel68_level2"></td>
+							<% elsif result == "3" %>
+								<td class="gel68_level3"></td>
+							<% end %>
+
+						<% end %>
+
+					<% else %>
+						<td class="material_name">mitochondria   :   no data</td>
+					<% end %>
+				</tr>
+			</table>	
+
+			<table class="mas_table" >
+				<tr>
+					<%if @results10_exists == true %>
+						<td class="material_name">
+							<%=link_to("envelope",{ :controller => "proteins",:action => "getchart",:material_id => "10",:main_gene_id =>@title,:gene_id_str => "",:class=> "widelink" ,:mode => "1"}) %>
+						</td>
+						<% @msresults10.each do |result| %>
+
+							<%if result == "0" %>
+								<td class="gel68_level0"></td>
+							<% elsif result == "1" %>
+								<td class="gel68_level1"></td>
+							<% elsif result == "2" %>
+								<td class="gel68_level2"></td>
+							<% elsif result == "3" %>
+								<td class="gel68_level3"></td>
+							<% end %>
+
+						<% end %>
+
+					<% else %>
+						<td class="material_name">envelope   :   no data</td>
+					<% end %>
+				</tr>
+			</table>	
+
+
+			<table class="mas_table" >
+				<tr>
+					<%if @results5_exists == true %>
+						<td class="material_name">
+							<%=link_to("stroma",{ :controller => "proteins",:action => "getchart",:material_id => "5",:main_gene_id =>@title,:gene_id_str => "",:class=> "widelink",:mode => "1" }) %>
+						</td>
+						<% @msresults5.each do |result| %>
+							<%if result == "0" %>
+								<td class="gel60_level0"></td>
+							<% elsif result == "1" %>
+								<td class="gel60_level1"></td>
+							<% elsif result == "2" %>
+								<td class="gel60_level2"></td>
+							<% elsif result == "3" %>
+								<td class="gel60_level3"></td>
+							<% end %>
+
+						<% end %>
+
+					<% else %>
+						<td class="material_name">stroma :   no data</td>
+					<% end %>
+				</tr>
+			</table>
+
+		
+			<table class="mas_table" >
+				<tr>
+					<%if @results1_exists == true %>
+						<td class="material_name">
+							<%=link_to("thylakoid ",{ :controller => "proteins",:action => "getchart",:material_id => "1",:mode => "1",:main_gene_id =>@title,:gene_id_str => "",:class=> "widelink" }) %>
+						</td>
+
+						<% @msresults1.each do |result| %>
+
+							<%if result == "0" %>
+								<td class="gel60_level0"></td>
+							<% elsif result == "1" %>
+								<td class="gel60_level1"></td>
+							<% elsif result == "2" %>
+								<td class="gel60_level2"></td>
+							<% elsif result == "3" %>
+								<td class="gel60_level3"></td>
+							<% end %>
+
+						<% end %>
+					<% else %>
+						<td class="material_name">thylakoid    :   no data</td>
+					<% end %>
+
+				</tr>
+			</table>
+			<% end %>
+
+
+			<% if @arabi_homolog_flg == true %>
+			<h1>Homolog</h1>
+			<% end %>
+			
+			<% if @organism == 7 or @arabi_homolog_flg==true %>
+			<table class="mas_table" >
+				<tr>
+					<%if @results17_exists == true %>
+						<td class="material_name">
+						<% if @protein.organism == 7 %>
+							<%=link_to("Physcomitrella",{ :controller => "proteins",:action => "getchart",:material_id => "17",:mode => "1",:main_gene_id =>@title,:gene_id_str => "",:class=> "widelink" }) %>
+						<% elsif @organism == 1 %>
+							<%=link_to("Physcomitrella :"+@arabi_homolog17_gene_id,{ :controller => "proteins",:action => "getchart",:material_id => "17",:mode => "1",:main_gene_id =>@arabi_homolog17_gene_id,:gene_id_str => "",:class=> "widelink" }) %>
+						<% end %>
+						</td>
+						<% @msresults17.each do |result| %>
+							<%if result == "0" %>
+								<td class="gel68_level0"></td>
+							<% elsif result == "1" %>
+								<td class="gel68_level1"></td>
+							<% elsif result == "2" %>
+								<td class="gel68_level2"></td>
+							<% elsif result == "3" %>
+								<td class="gel68_level3"></td>
+							<% end %>
+						<% end %>
+					<% else %>
+						<td class="material_name">Physcomitrella  :   no data</td>
+					<% end %>
+				</tr>
+			</table>
+		<% end %>
+		
+			<% if @organism == 3 or @arabi_homolog_flg==true %>
+			<table class="mas_table" >
+				<tr>
+					<%if @results13_exists == true %>
+						<td class="material_name">
+						<% if @organism == 3 %>
+							<%=link_to("Chlamydomonas",{ :controller => "proteins",:action => "getchart",:material_id => "13",:mode => "1",:main_gene_id =>@title,:gene_id_str => "",:class=> "widelink" }) %>
+						<% elsif @organism == 1 %>
+							<%=link_to("Chlamydomonas :"+@arabi_homolog13_gene_id,{ :controller => "proteins",:action => "getchart",:material_id => "13",:mode => "1",:main_gene_id =>@arabi_homolog13_gene_id,:gene_id_str => "",:class=> "widelink" }) %>
+						<% end %>
+						</td>
+						<% @msresults13.each do |result| %>
+							<%if result == "0" %>
+								<td class="gel68_level0"></td>
+							<% elsif result == "1" %>
+								<td class="gel68_level1"></td>
+							<% elsif result == "2" %>
+								<td class="gel68_level2"></td>
+							<% elsif result == "3" %>
+								<td class="gel68_level3"></td>
+							<% end %>
+						<% end %>
+					<% else %>
+						<td class="material_name">Chlamydomonas  :   no data</td>
+					<% end %>
+				</tr>
+			</table>
+		<% end %>
+
+	<% if @organism == 2 or @arabi_homolog_flg==true %>
+			<table class="mas_table" >
+				<tr>
+					<%if @results9_exists == true %>
+						<td class="material_name">
+						<% if @organism == 2 %>
+								<%=link_to("PCC6803 ",{ :controller => "proteins",:action => "getchart",:material_id => "9",:mode => "1",:main_gene_id =>@title,:gene_id_str => "",:class=> "widelink" }) %>
+
+						 <% elsif @organism == 1 %>
+							<%=link_to("PCC6803 "+@arabi_homolog9_gene_id,{ :controller => "proteins",:action => "getchart",:material_id => "9",:mode => "1",:main_gene_id =>@arabi_homolog9_gene_id,:gene_id_str => "",:class=> "widelink" }) %>
+						<% end %>
+						</td>
+						<% @msresults9.each do |result| %>
+							<%if result == "0" %>
+								<td class="gel60_level0"></td>
+							<% elsif result == "1" %>
+								<td class="gel60_level1"></td>
+							<% elsif result == "2" %>
+								<td class="gel60_level2"></td>
+							<% elsif result == "3" %>
+								<td class="gel60_level3"></td>
+							<% end %>
+						<% end %>
+					<% else %>
+						<td class="material_name">PCC6803  :   no data</td>
+					<% end %>
+				</tr>
+			</table>
+			<% end %>
+
+		<% if @organism == 13 or @arabi_homolog_flg==true %>
+			<table class="mas_table" >
+				<tr>
+					<%if @results30_exists == true %>
+						<td class="material_name">
+						<% if @organism == 13 %>
+							<%=link_to("Thermosynechococcus",{ :controller => "proteins",:action => "getchart",:material_id => "30",:mode => "1",:main_gene_id =>@title,:gene_id_str => "",:class=> "widelink" }) %>
+						<% elsif @organism == 1 %>
+							<%=link_to("Thermosynechococcus :"+@arabi_homolog30_gene_id,{ :controller => "proteins",:action => "getchart",:material_id => "30",:mode => "1",:main_gene_id =>@arabi_homolog30_gene_id,:gene_id_str => "",:class=> "widelink" }) %>
+						<% end %>
+						</td>
+
+						<% @msresults30.each do |result| %>
+							<%if result == "0" %>
+								<td class="gel60_level0"></td>
+							<% elsif result == "1" %>
+								<td class="gel60_level1"></td>
+							<% elsif result == "2" %>
+								<td class="gel60_level2"></td>
+							<% elsif result == "3" %>
+								<td class="gel60_level3"></td>
+							<% end %>
+						<% end %>
+					<% else %>
+						<td class="material_name">Thermosynechococcus  :   no data</td>
+					<% end %>
+				</tr>
+			</table>
+		<% end %>
+
+			<% if @organism == 5 or @arabi_homolog_flg==true %>
+			<table class="mas_table" >
+				<tr>
+					<%if @results15_exists == true %>
+						<td class="material_name">
+						<% if @organism == 5 %>
+							<%=link_to("CCMP1986",{ :controller => "proteins",:action => "getchart",:material_id => "15",:mode => "1",:main_gene_id =>@title,:gene_id_str => "",:class=> "widelink" }) %>
+						<% elsif @organism == 1 %>
+							<%=link_to("CCMP1986 :"+@arabi_homolog15_gene_id,{ :controller => "proteins",:action => "getchart",:material_id => "15",:mode => "1",:main_gene_id =>@arabi_homolog15_gene_id,:gene_id_str => "",:class=> "widelink" }) %>
+						<% end %>
+						</td>
+						<% @msresults15.each do |result| %>
+							<%if result == "0" %>
+								<td class="gel48_level0"></td>
+							<% elsif result == "1" %>
+								<td class="gel48_level1"></td>
+							<% elsif result == "2" %>
+								<td class="gel48_level2"></td>
+							<% elsif result == "3" %>
+								<td class="gel48_level3"></td>
+							<% end %>
+						<% end %>
+					<% else %>
+						<td class="material_name">CCMP1986  :   no data</td>
+					<% end %>
+				</tr>
+			</table>
+		<% end %>
+
+
+			<% if @organism == 4 or @arabi_homolog_flg==true %>
+			<table class="mas_table" >
+				<tr>
+					<%if @results14_exists == true %>
+						<td class="material_name">
+						<% if @organism == 4 %>
+							<%=link_to("CCMP1375",{ :controller => "proteins",:action => "getchart",:material_id => "14",:mode => "1",:main_gene_id =>@title,:gene_id_str => "",:class=> "widelink" }) %>
+						<% elsif @organism == 1 %>
+							<%=link_to("CCMP1375 :"+@arabi_homolog14_gene_id,{ :controller => "proteins",:action => "getchart",:material_id => "14",:mode => "1",:main_gene_id =>@arabi_homolog14_gene_id,:gene_id_str => "",:class=> "widelink" }) %>
+						<% end %>
+						</td>
+						<% @msresults14.each do |result| %>
+							<%if result == "0" %>
+								<td class="gel48_level0"></td>
+							<% elsif result == "1" %>
+								<td class="gel48_level1"></td>
+							<% elsif result == "2" %>
+								<td class="gel48_level2"></td>
+							<% elsif result == "3" %>
+								<td class="gel48_level3"></td>
+							<% end %>
+						<% end %>
+					<% else %>
+						<td class="material_name">CCMP1375  :   no data</td>
+					<% end %>
+				</tr>
+			</table>
+		<% end %>
+		
+
+			<% if @organism == 6 or @arabi_homolog_flg==true %>
+			<table class="mas_table" >
+				<tr>
+					<%if @results16_exists == true %>
+						<td class="material_name">
+						<% if @organism == 6 %>
+							<%=link_to("CCMP2773",{ :controller => "proteins",:action => "getchart",:material_id => "16",:mode => "1",:main_gene_id =>@title,:gene_id_str => "",:class=> "widelink" }) %>
+						<% elsif @organism == 1 %>
+							<%=link_to("CCMP2773 :"+@arabi_homolog16_gene_id,{ :controller => "proteins",:action => "getchart",:material_id => "16",:mode => "1",:main_gene_id =>@arabi_homolog16_gene_id,:gene_id_str => "",:class=> "widelink" }) %>
+						<% end %>
+						</td>
+						<% @msresults16.each do |result| %>
+							<%if result == "0" %>
+								<td class="gel48_level0"></td>
+							<% elsif result == "1" %>
+								<td class="gel48_level1"></td>
+							<% elsif result == "2" %>
+								<td class="gel48_level2"></td>
+							<% elsif result == "3" %>
+								<td class="gel48_level3"></td>
+							<% end %>
+						<% end %>
+					<% else %>
+						<td class="material_name">CCMP2773  :   no data</td>
+					<% end %>
+				</tr>
+			</table>
+		<% end %>
+		
+		<% end %>
+		</div> 

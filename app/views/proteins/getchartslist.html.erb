@@ -1,0 +1,344 @@
+		<div id='view'>
+			<!-- click gel_no&gene_id -->
+			<h1><%= @title %>
+			
+				<%if  @mode == "1" %>
+						<span id='mode_on'> normal</span>
+					<%= link_to({:action => 'getchart',:main_gene_id => @protein.gene_id,:material_id => @material.id,:mode => '2',:gene_id_str => @gene_id_str}) do %>
+						<span id='mode_off'> max100%</span><% end %>
+				<% else %>
+					<%= link_to({:action => 'getchart',:main_gene_id => @protein.gene_id,:material_id => @material.id,:mode => '1',:gene_id_str => @gene_id_str}) do %>
+						<span id='mode_off'> normal</span><% end %>
+						<span id='mode_on'> max100%</span>
+				<% end %>
+				<div class="posttext">
+				<%if  @protein.organism == 1 %>
+				<a href="http://arabidopsis.org/servlets/TairObject?type=locus&amp;name=<%= @protein.gene_id %>" target="_blank">
+	  				 link to Tair
+				</a> 　
+				<a href="http://www.genome.jp/dbget-bin/www_bget?ath:<%= @protein.gene_id %>" target="_blank">
+	  				 /link to KEGG
+				</a> 　
+				<a href="http://atted.jp/cgi-bin/locus.cgi?loc=<%= @protein.gene_id %>" target="_blank">
+	  				 /link to ATTED-II
+				</a> 　
+				<a href="https://phytozome.jgi.doe.gov/pz/portal.html#!resultssearch=1&crown=1&star=1&method=0&searchText=locusName:<%= @protein.gene_id %>" target="_blank">
+	  				 /link to Phytozome Plant Gene Families
+				</a>
+				<% elsif @protein.organism == 2 %>
+				 <a href="http://genome.microbedb.jp/cyanobase/Synechocystis/genes/<%= @protein.gene_id %>" target="_blank">link to CyanoBase
+				</a>
+				<% elsif @protein.organism == 5 %>
+				 <a href="http://genome.microbedb.jp/cyanobase/MED4/genes/<%= @protein.gene_id %>" target="_blank">link to CyanoBase
+				</a>
+				<% elsif @protein.organism == 4 %>
+				 <a href="http://genome.microbedb.jp/cyanobase/SS120/genes/<%= @protein.gene_id %>" target="_blank">link to CyanoBase
+				</a>
+				<% elsif @protein.organism == 6 %>
+				 <a href="http://genome.microbedb.jp/cyanobase/MIT9313/genes/<%= @protein.gene_id %>" target="_blank">link to CyanoBase
+				</a>
+				<% end %>
+				</div>
+			</h1>
+			<div class="posttext">
+				<p>symbols      :<%= @protein.symbols.tr('#',',') %></p>
+				<p>	description :<%= @protein.description.tr('#',',') %></p>
+			</div>
+			<!-- select gel_no&gene_id -->
+			<%= form_tag({ :action => "getchartslist" }, { :id => "gel_no_form",:name => "gel_no_form" }) do %>
+					<%= hidden_field_tag :material_id, @material.id %>
+					<%= hidden_field_tag :gel_no,@selected_gel_no %>
+					<%= hidden_field_tag :main_gene_id , @protein.gene_id %>
+					<%= hidden_field_tag :mode, @mode %>
+					<%= hidden_field_tag :gene_id_str, @gene_id_str %>
+					<%= submit_tag 'gel_no_submit_button', :id =>"gel_no_submit_button" , :style => "display: none" %>
+			<!-- chart -->
+			<div id="chart_container" style="width:580px;height:400px;"></div>
+
+			<!-- weight table -->
+			<div id="weighttable">
+			<table class="weight_table" >
+				<tr>
+					<td class="colm_name">gel_no<td>
+						<% @material.materialweights.each do |weight| %>
+							<td class="gel<%= @material.grid_disp%>"><%if weight.weight>0 %><%= weight.gel_no %><% end %></td>
+						<% end %>
+				</tr>
+				<tr>
+					<td class="colm_name">mw<td>
+						<% @material.materialweights.each do |weight| %>
+							<td class="gel<%= @material.grid_disp%>"><%if weight.weight>0 %><%= weight.weight.round %><% end %></td>
+						<% end %>
+				</tr>
+			</table>
+			</div>
+			
+		<!-- peak list -->
+			<%if @msresults!=nil %>
+			<table>
+				<tr>
+					<td><%= submit_tag 'reCharts', :id =>"recharts_button",:class=> "button1",:onclick=>"return BoxCheckedCnt(this.form);" %></td>
+					<td><input class="button1" type="button" onClick="BoxChecked(true,this.form);" value="AllCheck"></td>
+					<td><input class="button1" type="button" onClick="BoxChecked(false,this.form);" value="Clear"></td>
+					<td class="posttext"><img src ="/assets/yajirushi_green01.jpg" />   point selected  :  gel_no_<%= @selected_gel_no %>
+				</tr>
+			</table>
+
+			<%if @protein.organism !=1 %>
+			<table cellpadding="0" cellspacing="0" border="0" id="table" class="sortable">
+	 			<thead>
+					<tr>
+						<th class="nosort" style="width:10px"><h3>　</h3></th>
+						<th style="width:60px"><h3>gene_id</h3></th>
+						<th style="width:10px"><h3>peak</h3></th>
+						<th style="width:30px"><h3>emPAI</h3></th>
+						<th style="width:30px"><h3>/max emPAI<br>(%)</h3></th>
+						<th style="width:25px"><h3>mw</h3></th>
+						<th style="width:60px"><h3>symbols</h3></th>
+						<th style="width:80px"><h3>description</h3></th>
+						<th style="width:40px"><h3>Arabidopsis<br>gene_id</h3></th>
+						<th style="width:60px"><h3>Arabidopsis<br>symbols</h3></th>
+						<th style="width:80px"><h3>Arabidopsis<br>description</h3></th>
+					</tr>
+				</thead>
+
+				<tbody>
+				<% @msresults.each do |result| %>
+					<%if result.gene_id == @main_gene_id %>
+						<tr >
+							<td style="background:#c6c6db;"><%= check_box "gene_id", result.gene_id,:checked=>'checked', :disabled=>'disabled' %></td>
+							<td style="background:#c6c6db;"><%= link_to({:action => 'getchart',:main_gene_id => result.gene_id,:material_id => @material.id,:mode => "1",:gene_id_str =>@gene_id_str }) do %>
+									<span class="widelink"><%= result.gene_id %></span>
+									<% end %>
+							</td>
+							<td style="background:#c6c6db;text-align: center; ">
+								<%if result.peak == 1 %>P<% else %>　<% end %>
+							</td>
+							<td style="background:#c6c6db;text-align: right; "><%= sprintf("%3.2f",result.empai).to_f %></td>
+							<td style="background:#c6c6db;text-align: right; "><%= sprintf("%3.1f",result.empai_rt).to_f %></td>
+							<td style="background:#c6c6db;text-align: right;"><%= result.protein.weight.round%></td>
+							<td style="background:#c6c6db;"><%if result.protein.symbols == "" %>　<% else %><%= result.protein.symbols.tr('#',',') %><% end %></td>
+							<td style="background:#c6c6db;"><%if result.protein.description == "" %>　<% else %><%= result.protein.description.tr('#',',') %><% end %></td>
+							<td style="background:#c6c6db;"><%if result.protein.arabi_gene_id == "" %>　<% else %><%= result.protein.arabi_gene_id %><% end %></td>
+							<td style="background:#c6c6db;"><%if result.protein.arabi_symbols == "" %>　<% else %><%= result.protein.arabi_symbols.tr('#',',') %><% end %></td>
+							<td style="background:#c6c6db;"><%if result.protein.arabi_description == "" %>　<% else %><%= result.protein.arabi_description.tr('#',',') %><% end %></td>
+						</tr>
+					<% else %>
+						<tr>
+								<td>
+									<%if result.check == true %><%= check_box "gene_id", result.gene_id,:checked=>'checked' %><% else %><%= check_box "gene_id", result.gene_id %><% end %>
+								</td>
+								<td><%= link_to({:action => 'getchart',:main_gene_id => result.gene_id,:material_id => @material.id,:mode => "1" ,:gene_id_str =>@gene_id_str }) do %>
+									<span class="widelink"><%= result.gene_id %></span>
+									<% end %>
+								</td>
+								<td style="text-align: center; "><%if result.peak == 1 %>P<% else %>　<% end %></td>
+								<td style="text-align: right; "><%= sprintf("%3.2f",result.empai).to_f %></td>
+								<td style="text-align: right; "><%= sprintf("%3.1f",result.empai_rt).to_f %></td>
+								<td style="text-align: right; ">
+									<%if result.protein.weight >0 %><%= result.protein.weight.round%><% else %> 　-<% end %>
+								</td>
+								<td ><%if result.protein.symbols == "" %>　<% else %><%= result.protein.symbols.tr('#',',') %><% end %></td>
+								<td ><%if result.protein.description == "" %>　<% else %><%= result.protein.description.tr('#',',') %><% end %></td>
+								<td ><%if result.protein.arabi_gene_id == "" %>　<% else %><%= result.protein.arabi_gene_id %><% end %></td>
+								<td ><%if result.protein.arabi_symbols == "" %>　<% else %><%= result.protein.arabi_symbols.tr('#',',') %><% end %></td>
+								<td ><%if result.protein.arabi_description == "" %>　<% else %><%= result.protein.arabi_description.tr('#',',') %><% end %></td>
+							</tr>
+							<% end %>
+						<% end %>
+				</tbody>
+			</table>
+	<% else %>
+			<table cellpadding="0" cellspacing="0" border="0" id="table" class="sortable">
+	 			<thead>
+					<tr>
+						<th class="nosort" style="width:10px"><h3>　</h3></th>
+						<th style="width:70px"><h3>gene_id</h3></th>
+						<th style="width:10px"><h3>peak</h3></th>
+						<th style="width:30px"><h3>emPAI</h3></th>
+						<th style="width:30px"><h3>/max emPAI<br>(%)</h3></th>
+						<th style="width:25px"><h3>mw</h3></th>
+						<th style="width:80px"><h3>symbols</h3></th>
+						<th style="width:200px"><h3>description</h3></th>
+					</tr>
+				</thead>
+
+				<tbody>
+				<% @msresults.each do |result| %>
+					<%if result.gene_id == @main_gene_id %>
+						<tr>
+							<td style="background:#c6c6db;"><%= check_box "gene_id", result.gene_id,:checked=>'checked', :disabled=>'disabled' %></td>
+							<td style="background:#c6c6db;"><%= link_to({:action => 'getchart',:main_gene_id => result.gene_id,:material_id => @material.id,:mode => "1",:gene_id_str => "" }) do %>
+									<span class="widelink"><%= result.gene_id %></span>
+									<% end %>
+							</td>
+							<td style="background:#c6c6db;text-align: center; ">
+								<%if result.peak == 1 %>P<% else %>　<% end %>
+							</td>
+							<td style="background:#c6c6db;text-align: right; "><%= sprintf("%3.2f",result.empai).to_f %></td>
+							<td style="background:#c6c6db;text-align: right; "><%= sprintf("%3.1f",result.empai_rt).to_f %></td>
+							<td style="background:#c6c6db;text-align: right;"><%= result.protein.weight.round%></td>
+							<td style="background:#c6c6db;">
+								<%if result.protein.symbols == "" %>　<% else %><%= result.protein.symbols.tr('#',',') %><% end %>
+							</td>
+							<td style="background:#c6c6db;">
+								<%if result.protein.description == "" %>　<% else %><%= result.protein.description.tr('#',',') %><% end %>
+							</td>
+						</tr>
+					<% else %>
+						<tr>
+							<td>
+									<%if result.check == true %>
+											<%= check_box "gene_id", result.gene_id,:checked=>'checked' %>
+									<% else %>
+											<%= check_box "gene_id", result.gene_id %>
+									<% end %>
+							</td>
+							<td><%= link_to({:action => 'getchart',:main_gene_id => result.gene_id,:material_id => @material.id,:mode => "1",:gene_id_str => "" }) do %>
+									<span class="widelink"><%= result.gene_id %></span>
+									<% end %>
+							</td>
+							<td style="text-align: center; "><%if result.peak == 1 %>P<% else %>　<% end %></td>
+							<td style="text-align: right; "><%= sprintf("%3.2f",result.empai).to_f %></td>
+							<td style="text-align: right; "><%= sprintf("%3.1f",result.empai_rt).to_f %></td>
+							<td style="text-align: right; ">
+								<%if result.protein.weight >0 %><%= result.protein.weight.round%><% else %> 　-<% end %>
+							</td>
+							<td ><%if result.protein.symbols == "" %>　<% else %><%= result.protein.symbols.tr('#',',') %><% end %></td>
+							<td ><%if result.protein.description == "" %>　<% else %><%= result.protein.description.tr('#',',') %><% end %></td>
+						</tr>
+				<% end %>
+			<% end %>
+		</tbody>
+	</table>
+	<% end %>
+	<% end %>
+	<% end %>
+			
+	<script>
+				window.chartsets = <%= raw @chartsList.to_json %>;
+				var xarray=window.chartsets[0].xlist.split(",");
+				var y_title = "emPAI";
+	
+				$(function () {
+					if(document.gel_no_form.mode.value ==2) y_title = "emPAI(%)";
+					makeChart();
+					});
+				function makeChart() {
+					var chart;
+					// define the options
+					var options = {
+						chart: {
+							renderTo: 'chart_container'
+						},
+						title: {
+							text: 'Migration Profile'
+						},
+						subtitle: {
+							text: '　　　　　　　　　　'
+						},
+						xAxis: { // X軸
+						title: {
+								text:'gel_slice_number'
+						},
+						tickInterval: 5,
+						tickWidth: 0,
+						gridLineWidth: 1,
+						categories:xarray,
+						labels: {
+							align: 'left',
+							x: 3,
+							y: -3 
+						}
+					},
+					yAxis: [{ // left y axis
+						title: {
+							text: y_title
+						},
+						labels: {
+							align: 'left',
+							x: 3,
+							y: 16,
+						},
+						showFirstLabel: false
+					}, { // right y axis
+						linkedTo: 0,
+						gridLineWidth: 0,
+						opposite: true,
+						title: {
+							text: y_title
+						},
+						labels: {
+							align: 'right',
+							x: -3,
+							y: 16,
+						},
+						showFirstLabel: false
+					}],
+					legend: {
+						align: 'left',
+						verticalAlign: 'top',
+						y: 20,
+						floating: true,
+						borderWidth: 0
+					},
+					credits: {
+						enabled: false
+					},
+					tooltip: {
+						shared: true,
+						crosshairs: true
+					},
+					plotOptions: {
+					series: {
+							cursor: 'pointer',
+							point: {
+								events: {
+									click: function() {
+											//document.gel_no_form.gene_id.value =this.series.name;
+											document.gel_no_form.gel_no.value =this.x+1;
+											document.gel_no_form.action ='/proteins/getchartlist?main_gene_id='+document.gel_no_form.main_gene_id.value+'&gel_no='+document.gel_no_form.gel_no.value+'&material_id='+document.gel_no_form.material_id.value+'&mode='+document.gel_no_form.mode.value+'&gene_id_str='+document.gel_no_form.gene_id_str.value;
+											showList();
+									}	
+								}
+							},
+							marker: {
+								lineWidth: 1
+							}
+						}
+					}
+				}
+				options.series = new Array(window.chartsets.length);
+				for(var i=0; i<window.chartsets.length; i++){
+						options.series[i] 			=	new Array(1);
+						options.series[i].name 	=	window.chartsets[i].gene_id
+						var ylist							=	window.chartsets[i].ylist.split(",");
+						var yarray 					=	new Array();
+						for(var j=0; j<ylist.length; j++){
+				    		var num =Number(ylist[j])
+				     		yarray.push(num);
+						}
+						options.series[i].data =yarray;
+				}
+				chart = new Highcharts.Chart(options);
+			}
+				function showList(){
+						$("#gel_no_submit_button").click();
+					}
+		var sorter = new TINY.table.sorter("sorter");
+		sorter.head = "head";
+		sorter.asc = "asc";
+		sorter.desc = "desc";
+		sorter.even = "evenrow";
+		sorter.odd = "oddrow";
+		sorter.evensel = "evenselected";
+		sorter.oddsel = "oddselected";
+		sorter.paginate = true;
+		sorter.currentid = "currentpage";
+		sorter.limitid = "pagelimit";
+		sorter.init("table",1);
+
+				</script>
+	</div>
+
+

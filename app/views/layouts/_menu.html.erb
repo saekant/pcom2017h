@@ -1,0 +1,78 @@
+	<ul class="menu">
+			<li><%=link_to("Top",{ :controller => "proteins",:action => "top" }) %>
+			<ul class="sub">	
+					<li><%=link_to("Overview",{ :controller => "proteins",:action => "overview" }) %></li>
+					<li><%=link_to("Help",{ :controller => "proteins",:action => "help" }) %></li>
+					<li><%=link_to("Resources",{ :controller => "proteins",:action => "resources" }) %></li>
+					<li><%=link_to("About us",{ :controller => "proteins",:action => "aboutus" }) %></li>
+				</ul>
+			</li>
+			<li><a href="#">Search</a>
+				<ul class="sub">
+						<li><%=link_to("Single protein search",{ :controller => "proteins",:action => "key_protein" }) %></li>
+						<li><%=link_to("Multiple protein search",{ :controller => "proteins",:action => "key_proteins" }) %></li>
+				</ul>
+			</li>
+			<li><a href="#">Browse</a>
+				<ul class="sub">
+					<li><a href="#">Arabidopsis thaliana</a>
+							<ul class="sub">
+								<li><%=link_to("chloroplast",{ :controller => "proteins",:action => "list_protein",:material_id => "3"}) %></li>
+								<li><%=link_to("chloroplast 2",{ :controller => "proteins",:action => "list_protein",:material_id => "4"}) %></li>
+								<li><%=link_to("mitochondria",{ :controller => "proteins",:action => "list_protein",:material_id => "18"}) %></li>
+								<li><%=link_to("envelope",{ :controller => "proteins",:action => "list_protein",:material_id => "10"}) %></li>
+								<li><%=link_to("stroma",{ :controller => "proteins",:action => "list_protein",:material_id => "5"}) %></li>
+								<li><%=link_to("thylakoid",{ :controller => "proteins",:action => "list_protein",:material_id => "1"}) %></li>
+							</ul>
+					</li>
+			</ul>
+			<ul class="sub">
+					<li><a href="#">Physcomitrella patens</a>
+						<ul class="sub">
+							<li><%=link_to("whole cells",{ :controller => "proteins",:action => "list_protein",:material_id => "17"}) %></li>
+						</ul>
+					</li>
+			</ul>
+			<ul class="sub">
+					<li><a href="#"><i>Chlamydomonas reinhardtii</i></a>
+						<ul class="sub">
+							<li><%=link_to("whole cells",{ :controller => "proteins",:action => "list_protein",:material_id => "13"}) %></li>
+						</ul>
+					</li>
+			</ul>
+				<ul class="sub">
+					<li><a href="#">Synechosystis sp. PCC6803</a>
+						<ul class="sub">
+							<li><%=link_to("whole cells",{ :controller => "proteins",:action => "list_protein",:material_id => "9"}) %></li>
+						</ul>
+					</li>
+			 </ul>
+			 <ul class="sub">
+					<li><a href="#"><i>Thermosynechococcus elongatus</i> BP-1</a>
+						<ul class="sub">
+							<li><%=link_to("whole cells",{ :controller => "proteins",:action => "list_protein",:material_id => "30"}) %></li>
+						</ul>
+					</li>
+			</ul>
+			<ul class="sub">
+					<li><a href="#"><i>Prochlorococcus</i> CCMP1986</a>
+						<ul class="sub">
+							<li><%=link_to("whole cells",{ :controller => "proteins",:action => "list_protein",:material_id => "15"}) %></li>
+						</ul>
+					</li>
+			</ul>
+			<ul class="sub">
+					<li><a href="#"><i>Prochlorococcus</i> CCMP1375</a>
+						<ul class="sub">
+							<li><%=link_to("whole cells",{ :controller => "proteins",:action => "list_protein",:material_id => "14"}) %></li>
+						</ul>
+					</li>
+			</ul>
+			<ul class="sub">
+					<li><a href="#"><i>Prochlorococcus</i> CCMP2773</a>
+						<ul class="sub">
+							<li><%=link_to("whole cells",{ :controller => "proteins",:action => "list_protein",:material_id => "16"}) %></li>
+						</ul>
+					</li>
+			</ul>
+
