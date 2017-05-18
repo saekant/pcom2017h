@@ -16,8 +16,7 @@ ActiveRecord::Schema.define(version: 20150331045047) do
   create_table "materials", force: true do |t|
     t.integer "organism_id"
     t.string  "material_name"
-    t.string  "grid_disp",     limit: 10
-    t.string  "list_disp",     limit: 10
+    t.string  "grid_disp"
   end
 
   add_index "materials", ["organism_id"], name: "index_materials_on_organism_id"
@@ -27,6 +26,8 @@ ActiveRecord::Schema.define(version: 20150331045047) do
     t.integer "gel_no"
     t.decimal "weight"
   end
+
+  add_index "materialweights", ["material_id"], name: "index_materialweights_on_material_id"
 
   create_table "msresults", force: true do |t|
     t.integer "material_id"
@@ -56,6 +57,9 @@ ActiveRecord::Schema.define(version: 20150331045047) do
     t.string  "arabi_symbols"
     t.string  "arabi_description"
   end
+
+  add_index "proteins", ["arabi_gene_id"], name: "arabi_gene_id_index"
+  add_index "proteins", ["gene_id"], name: "gene_id_index"
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
