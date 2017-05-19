@@ -14,7 +14,7 @@ group :production do
   gem 'pg'
 end
 
-gem "heroku"
+#gem "heroku"
 
 
 # Use SCSS for stylesheets
