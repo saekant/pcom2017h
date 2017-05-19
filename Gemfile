@@ -11,9 +11,12 @@ gem 'rails', '4.0.1'
 #  gem 'sqlite3'
 #end
 
-group :production do
-  gem 'pg'
-end
+#group :production do
+#  gem 'pg'
+#end
+
+gem 'pg'
+
 
 #gem "heroku"
 
