@@ -2,15 +2,20 @@
 #require 'gruff'
 
 class ProteinsController < ApplicationController
-
+protect_from_forgery :except => [:getchartlist]
 layout 'proteins', :except => [ :top,  :help_geneId]
+
 
 ################################
 #メニュー→一覧表示
 ################################
 	def list_protein
+		#@material			=		Material.where(material_id:3)
+		#@material			=		Material.where(material_id: params[:material_id])
 		@material			=		Material.find(params[:material_id])
+		#@material			=		Material.find_by(params[:material_id])
 		@list_protein		=		Msresult.where('material_id =:material_id AND gel_no=1',:material_id =>params[:material_id].to_i)
+		
 	end
 
 ##################################
@@ -77,11 +82,13 @@ def getchartlist
 		#charts
 		makeCharts(params[:main_gene_id],params[:gene_id],params[:gene_id_str],params[:material_id],params[:mode],1,1)
 
+
 		#header
 		setheader(params[:main_gene_id],params[:material_id],params[:mode])
 		
 		#weight
-		@weights 		=   Materialweight.find_all_by_material_id(params[:material_id].to_i)
+		#@weights 		=   Materialweight.find_all_by_material_id(params[:material_id].to_i)
+		@weights 		=   Materialweight.where(material_id: params[:material_id].to_i)
 
 		render 'proteins/getchartslist'
 #		render 'proteins/getchart'
@@ -102,7 +109,8 @@ def getchartslist
 		setheader(params[:main_gene_id],params[:material_id],params[:mode])
 		
 		#weight
-		@weights 		=   Materialweight.find_all_by_material_id(params[:material_id].to_i)
+		#@weights 		=   Materialweight.find_all_by_material_id(params[:material_id].to_i)
+		@weights 		=   Materialweight.where(material_id: params[:material_id].to_i)
 
 #		render 'proteins/getchartslist'
 end
@@ -115,13 +123,14 @@ def makeCharts(w_main_gene_id,w_gene_id,w_gene_id_str,w_material_id,w_mode,w_lis
 #		keys 					=		Hash.new
 		wkeys				=		Array.new
 		@chartsList		=		Array.new
-		@gene_id_str	=		""
+		@gene_id_str		=		""
 
 		#chart
 		#gene_list remake
 #ALL
 		wkeys.push(w_main_gene_id)
 		keys = w_gene_id
+
 #ALL
 #2,1
 		if	w_keyFlg==1 
@@ -135,14 +144,14 @@ def makeCharts(w_main_gene_id,w_gene_id,w_gene_id_str,w_material_id,w_mode,w_lis
 						end
 					}
 			end
-##3
+###3
 		else
 			keys.each {|key|
 			if(key[1]==("1") && key[0]!= w_material_id)
 				wkeys.push(key[0])
 			end
 		}
-			@gene_id_str	=	wkeys.join(',')
+    		@gene_id_str	=	wkeys.join(',')
 		end
 ##3
 
@@ -151,9 +160,9 @@ def makeCharts(w_main_gene_id,w_gene_id,w_gene_id_str,w_material_id,w_mode,w_lis
 			#set gene_id
 			chartset					=	Chartset.new
 			chartset.gene_id		=	key
-		
-			results		=	Msresult.find_all_by_material_id_and_gene_id(w_material_id.to_i,key)
-
+	
+      @results		   =	Msresult.where(material_id: w_material_id.to_i, gene_id:key)
+ 
 			#checkbox
 			if(w_listflg==1)
 				@msresults.each {|result|	
@@ -164,12 +173,13 @@ def makeCharts(w_main_gene_id,w_gene_id,w_gene_id_str,w_material_id,w_mode,w_lis
 			end
 
 			wdataList = Array.new
-			results.each {|result|
+			@results.each {|result|
 				#set ylist
 				if(w_mode=="1")
 					wdataList.push(sprintf("%3.2f",result.empai).to_f)
 				else
 					wdataList.push(sprintf("%3.2f",result.empai_rt).to_f)
+
 				end
 				
 				#set xlist
