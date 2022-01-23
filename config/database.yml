@@ -31,8 +31,9 @@ test:
   timeout: 5000
 
 production:
+  url: <%= ENV['MY_APP_DATABASE_URL'] %>
   #url: <%= ENV['DATABASE_URL'] %>
-  url = "postgresql://foo:bar@localhost:9000/foo_test?pool=5&timeout=3000"
+  #url = "postgresql://foo:bar@localhost:9000/foo_test?pool=5&timeout=3000"
   adapter: postgresql
   database: mydatabase
 #  adapter: sqlite3
