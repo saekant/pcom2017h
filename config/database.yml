@@ -32,14 +32,15 @@ test:
 
 production:
  <<: *default
-      url: <%= ENV['DATABASE_URL'] %>
+ #url: <%= ENV['DATABASE_URL'] %>
   #url: <%= ENV['MY_APP_DATABASE_URL'] %>
   #url: <%= ENV['DATABASE_URL'] %>
   #url = "postgresql://foo:bar@localhost:9000/foo_test?pool=5&timeout=3000"
   
   adapter: postgresql
-  database: mydatabase
-  #  adapter: sqlite3
- #  database: db/production.sqlite3
+  #database: mydatabase
+  database: myapp_production
+  username: myapp
+  password: <%= ENV['MYAPP_DATABASE_PASSWORD'] %>
   pool: 5
   timeout: 5000
