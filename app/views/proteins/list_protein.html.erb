@@ -51,11 +51,11 @@
 								<span class="widelink"><%= result.gene_id %></span>
 							<% end %>
 						</td>
-						<td ><%if result.protein.symbols == "" %>　<% else %><%= result.protein.symbols.tr('#',',') %><% end %></td>
-						<td ><%if result.protein.description == "" %>　<% else %><%= result.protein.description.tr('#',',') %><% end %></td>
-						<td><%if result.protein.arabi_gene_id == "" %>　<% else %><%= result.protein.arabi_gene_id %><% end %></td>
-						<td><%if result.protein.arabi_symbols == "" %>　<% else %><%= result.protein.arabi_symbols.tr('#',',') %><% end %></td>
-						<td><%if result.protein.arabi_description == "" %>　<% else %><%= result.protein.arabi_description.tr('#',',') %><% end %></td>
+						<td ><%= result.protein.symbols_tr %></td>
+						<td ><%= result.protein.description_tr %></td>
+						<td><%= result.protein.arabi_gene_id %></td>
+						<td><%= result.protein.arabi_symbols_tr %></td>
+						<td><%= result.protein.arabi_description_tr %></td>
 					</tr>
 				<% end %>
 				</tbody>
@@ -78,8 +78,8 @@
 								<span class="widelink"><%= result.gene_id %></span>
 							<% end %>
 						</td>
-						<td ><%if result.protein.symbols == "" %>　<% else %><%= result.protein.symbols.tr('#',',') %><% end %></td>
-						<td ><%if result.protein.description == "" %>　<% else %><%= result.protein.description.tr('#',',') %><% end %></td>
+						<td ><%= result.protein.symbols_tr%></td>
+						<td ><%= result.protein.description_tr %></td>
 					</tr>
 				<% end %>
 				</tbody>
