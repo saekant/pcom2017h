@@ -758,7 +758,8 @@ print @protein.organism
 			#if params[:arabi_homolog_flg]=="true" and @organism =1 then
 			if @organism ==1 then
 				@arabi_homolog_flg=true	
-				homolog_proteins = Protein.find_all_by_arabi_gene_id(@protein.gene_id)
+				#homolog_proteins = Protein.find_all_by_arabi_gene_id(@protein.gene_id)
+				homolog_proteins = Protein.where('arabi_gene_id=?', @protein.gene_id) 
 				homolog_proteins.each {|w_protein|
 					homolog_materials		=	Msresult.where('gene_id = :gene_id AND gel_no =1',:gene_id =>w_protein.gene_id)
 					homolog_materials.each {|homolog_material|
@@ -935,10 +936,7 @@ print @protein.organism
 			@title = params[:search_gene_id]
 		end
 
-print "#####organism2 END:"
-print @protein.organism
-print "#####organism3 END:"
-print  @organism
+
   	end
     
 def downloadAtChl2
