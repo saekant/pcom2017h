@@ -1,11 +1,5 @@
-class CreateMaterialweights < ActiveRecord::Migration
+class CreateMaterialweights < ActiveRecord::Migration[4.2]
   def change
-    create_table :materialweights do |t|
-      t.integer :gel_no
-      t.decimal :weight
-      t.references :material, index: true
-
-      t.timestamps
-    end
+  
   end
 end

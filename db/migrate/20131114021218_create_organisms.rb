@@ -1,9 +1,5 @@
-class CreateOrganisms < ActiveRecord::Migration
+class CreateOrganisms < ActiveRecord::Migration[4.2]
   def change
-    create_table :organisms do |t|
-      t.string :organism_name
-
-      t.timestamps
-    end
+    
   end
 end

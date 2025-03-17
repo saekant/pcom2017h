@@ -1,0 +1,64 @@
+# ---- macOS 固有の不要ファイル ----
+.DS_Store
+
+# ---- ログファイル（Git管理不要） ----
+log/*
+!log/.keep  # 空のlogフォルダを保つためのプレースホルダ
+
+# ---- 一時ファイル ----
+tmp/*
+!tmp/.keep  # 空のtmpフォルダを保つためのプレースホルダ
+
+# ---- pidファイル ----
+*.pid
+
+# ---- バンドルされたGems（Herokuでは自動でInstallされるため不要） ----
+/vendor/bundle
+
+# ---- Byebug履歴（デバッグツール） ----
+.byebug_history
+
+# ---- サーバ用ファイル（例：puma） ----
+/pids
+*.pid
+
+# ---- Action Cable用ファイル ----
+/cable
+
+# ---- database.ymlのテンプレートがある場合はそれ以外を除外 ----
+/config/database.yml
+
+# ---- Rails master key（秘匿情報） ----
+/config/master.key
+/config/credentials.yml.enc
+
+# ---- public/uploads や storage（Active Storage用の一時ファイル） ----
+/public/uploads
+/storage/*
+
+# ---- Active Storage keep file ----
+!/storage/.keep
+
+# ---- webpackerやsprocketsで使わない場合 ----
+/public/packs
+/public/packs-test
+/node_modules
+
+# ---- Yarnやnpm ----
+yarn-debug.log*
+.yarn-integrity
+npm-debug.log*
+package-lock.json  # npmを使わない場合
+
+# ---- coverage (テストカバレッジツールSimpleCovなど) ----
+/coverage
+
+# ---- dotenv環境変数ファイル（個人用の秘密情報など） ----
+.env
+.env.*
+
+# ---- テスト用の一時ファイル ----
+/spec/examples.txt
+
+# ---- キャッシュ ----
+/tmp/cache
