@@ -41,6 +41,15 @@ bin/brakeman             # static security analysis
 bin/bundler-audit        # known vulnerabilities in gems
 ```
 
+## Maintenance
+
+- GitHub Actions runs the tests and security checks on every pull request, on every
+  push to `master`, and on the 1st of every month.
+- Dependabot opens a monthly pull request with gem / GitHub Actions updates.
+  Review it (CI must be green) and merge – merging to `master` deploys to Heroku.
+- `vendor/assets/javascripts/highcharts.js` is not covered by Dependabot; check for a
+  new Highcharts release about once a year.
+
 ## Production settings (Heroku config vars)
 
 - `DATABASE_URL` – set by Heroku Postgres

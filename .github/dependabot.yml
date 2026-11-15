@@ -1,0 +1,25 @@
+# Dependabot opens ONE pull request per month for each ecosystem when updates exist.
+# Pull requests are never merged automatically: merging to master deploys to Heroku,
+# so please review (CI must be green) before merging.
+version: 2
+updates:
+  - package-ecosystem: bundler
+    directory: /
+    schedule:
+      interval: monthly
+    groups:
+      gems:
+        patterns: [ "*" ]
+    open-pull-requests-limit: 3
+    commit-message:
+      prefix: "deps"
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    groups:
+      actions:
+        patterns: [ "*" ]
+    commit-message:
+      prefix: "ci"

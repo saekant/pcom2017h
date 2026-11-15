@@ -160,7 +160,17 @@ DB の作り方の問題ではなく、旧アプリのプログラム側の問�
 Ruby 3.3（サポートは2027年3月まで）から 3.4.12（2028年3月まで）に更新。
 作業環境で Ruby をソースから組み立て、テスト・brakeman・bundle-audit・ブラウザでの確認をやり直した。
 
-## 11. 今後の予定
+## 11. 保守の自動化（第5段階）
 
-- GitHub Actions（テスト・脆弱性チェック）と Dependabot の設定
+- **GitHub Actions**（`.github/workflows/ci.yml`）：プルリクエスト、`master` への push、毎月1日、手動で実行。
+  - Security：brakeman（コード解析）と bundler-audit（Gem の既知の脆弱性）
+  - Tests：PostgreSQL 17 のコンテナに空のスキーマを作り、自動テストを実行
+  - 月1回の定期実行で、コードを変えていなくても新しく公開された脆弱性に気づける
+- **Dependabot**（`.github/dependabot.yml`）：Gem と GitHub Actions の更新を、月1回それぞれ1件のプルリクエストにまとめる。
+  `master` へのマージ＝本番デプロイなので、自動マージはしない。
+- Heroku の「Wait for CI to pass before deploy」を有効にすると、CI が成功した変更だけがデプロイされる。
+- 同梱している Highcharts（`vendor/assets/javascripts/highcharts.js`）は Dependabot の対象外。年1回程度、手動で更新を確認する。
+
+## 12. 今後の予定
+
 - 本番への切り替え（バックアップ取得後、`master` へのマージで自動デプロイ）
