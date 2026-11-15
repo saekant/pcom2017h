@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2015_03_31_045047) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_16_000002) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -36,6 +36,7 @@ ActiveRecord::Schema[8.1].define(version: 2015_03_31_045047) do
     t.float "empai", limit: 24
     t.decimal "empai_rt"
     t.integer "peak", limit: 2
+    t.index ["gene_id", "material_id", "gel_no"], name: "index_msresults_on_gene_id_and_material_id_and_gel_no"
     t.index ["material_id"], name: "index_msresults_on_material_id"
     t.index ["protein_id"], name: "index_msresults_on_protein_id"
   end
@@ -54,22 +55,8 @@ ActiveRecord::Schema[8.1].define(version: 2015_03_31_045047) do
     t.string "arabi_gene_id", limit: 256
     t.string "arabi_symbols", limit: 256
     t.string "arabi_description", limit: 256
-  end
-
-  create_table "users", id: :serial, force: :cascade do |t|
-    t.string "email", limit: 255, default: "", null: false
-    t.string "encrypted_password", limit: 255, default: "", null: false
-    t.string "reset_password_token", limit: 255
-    t.datetime "reset_password_sent_at", precision: nil
-    t.datetime "remember_created_at", precision: nil
-    t.integer "sign_in_count", default: 0, null: false
-    t.datetime "current_sign_in_at", precision: nil
-    t.datetime "last_sign_in_at", precision: nil
-    t.string "current_sign_in_ip", limit: 255
-    t.string "last_sign_in_ip", limit: 255
-    t.datetime "created_at", precision: nil
-    t.datetime "updated_at", precision: nil
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["arabi_gene_id"], name: "index_proteins_on_arabi_gene_id"
+    t.index ["gene_id"], name: "index_proteins_on_gene_id"
+    t.index ["search_gene_id"], name: "index_proteins_on_search_gene_id"
   end
 end
