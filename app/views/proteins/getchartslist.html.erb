@@ -6,14 +6,14 @@
   external_links =
     case @protein.organism
     when 1
-      [ [ "link to Tair", "https://www.arabidopsis.org/servlets/TairObject?type=locus&name=#{gene}" ],
-        [ "/link to KEGG", "https://www.genome.jp/dbget-bin/www_bget?ath:#{gene}" ],
-        [ "/link to ATTED-II", "https://atted.jp/cgi-bin/locus.cgi?loc=#{gene}" ],
-        [ "/link to Phytozome Plant Gene Families", "https://phytozome.jgi.doe.gov/pz/portal.html#!resultssearch=1&crown=1&star=1&method=0&searchText=locusName:#{gene}" ] ]
-    when 2 then [ [ "link to CyanoBase", "http://genome.microbedb.jp/cyanobase/Synechocystis/genes/#{gene}" ] ]
-    when 4 then [ [ "link to CyanoBase", "http://genome.microbedb.jp/cyanobase/SS120/genes/#{gene}" ] ]
-    when 5 then [ [ "link to CyanoBase", "http://genome.microbedb.jp/cyanobase/MED4/genes/#{gene}" ] ]
-    when 6 then [ [ "link to CyanoBase", "http://genome.microbedb.jp/cyanobase/MIT9313/genes/#{gene}" ] ]
+      [ [ "Tair", "https://www.arabidopsis.org/servlets/TairObject?type=locus&name=#{gene}" ],
+        [ "KEGG", "https://www.genome.jp/dbget-bin/www_bget?ath:#{gene}" ],
+        [ "ATTED-II", "https://atted.jp/cgi-bin/locus.cgi?loc=#{gene}" ],
+        [ "Phytozome Plant Gene Families", "https://phytozome.jgi.doe.gov/pz/portal.html#!resultssearch=1&crown=1&star=1&method=0&searchText=locusName:#{gene}" ] ]
+    when 2 then [ [ "CyanoBase", "http://genome.microbedb.jp/cyanobase/Synechocystis/genes/#{gene}" ] ]
+    when 4 then [ [ "CyanoBase", "http://genome.microbedb.jp/cyanobase/SS120/genes/#{gene}" ] ]
+    when 5 then [ [ "CyanoBase", "http://genome.microbedb.jp/cyanobase/MED4/genes/#{gene}" ] ]
+    when 6 then [ [ "CyanoBase", "http://genome.microbedb.jp/cyanobase/MIT9313/genes/#{gene}" ] ]
     else []
     end
   arabidopsis = @protein.organism == Organism::ARABIDOPSIS
@@ -23,16 +23,16 @@
   <h1><%= @title %>
     <% if @mode == "1" %>
       <span id="mode_on"> normal</span>
-      <%= link_to mode_link.call("2") do %><span id="mode_off"> max100%</span><% end %>
+      <%= link_to mode_link.call("2"), class: "mode-link" do %><span id="mode_off"> max100%</span><% end %>
     <% else %>
-      <%= link_to mode_link.call("1") do %><span id="mode_off"> normal</span><% end %>
+      <%= link_to mode_link.call("1"), class: "mode-link" do %><span id="mode_off"> normal</span><% end %>
       <span id="mode_on"> max100%</span>
     <% end %>
-    <div class="posttext">
-      <% external_links.each do |label, url| %>
-        <%= link_to label, url, target: "_blank", rel: "noopener" %>
-      <% end %>
-    </div>
+    <% if external_links.any? %>
+      <div class="ext-links">
+        <%= safe_join(external_links.map { |label, url| link_to(label, url, target: "_blank", rel: "noopener", title: "Open #{label} in a new tab") }, " · ") %>
+      </div>
+    <% end %>
   </h1>
 
   <div class="posttext">

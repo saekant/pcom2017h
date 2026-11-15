@@ -204,3 +204,24 @@ tr[data-href] {cursor:pointer;}
 .pcom-lightbox img {max-width:92vw; max-height:90vh; background:#fff; padding:6px; box-shadow:0 4px 20px rgba(0,0,0,.4);}
 .pcom-lightbox button {position:absolute; top:12px; right:16px; font-size:28px; line-height:1; color:#fff;
   background:none; border:0; cursor:pointer;}
+
+/* ==================== links (design C, 2026) ==================== */
+/* External database links under the chart title: small, quiet, marked with an arrow */
+#view h1 .ext-links {margin-top:6px; font-family:"Trebuchet MS",Verdana,Helvetica,sans-serif; font-size:11px; font-weight:normal; color:#8aa66a;}
+#view h1 .ext-links a {color:#5d7f2f; text-decoration:none;}
+#view h1 .ext-links a::after {content:" \2197"; font-size:10px;}
+#view h1 .ext-links a:hover, #view h1 .ext-links a:focus {color:#2f5410; text-decoration:underline; text-underline-offset:3px;}
+
+/* normal / max100% switch */
+#mode_on, #mode_off {font-size:12px;}
+#mode_off {color:#8aa66a;}
+a.mode-link {text-decoration:none;}
+a.mode-link:hover #mode_off {color:#2f5410; text-decoration:underline; text-underline-offset:3px;}
+
+/* Gene IDs and sample names in tables: dark green, no underline until hovered */
+table.sortable a, table.mas_table td.material_name a {text-decoration:none;}
+span.widelink {color:#2f5410; font-family:"SFMono-Regular",Menlo,Consolas,"Liberation Mono",monospace; font-size:12px;}
+table.mas_table td.material_name a {color:#2f5410; font-weight:bold;}
+table.sortable a:hover span.widelink, table.sortable a:focus span.widelink,
+table.mas_table td.material_name a:hover, table.mas_table td.material_name a:focus {text-decoration:underline; text-underline-offset:3px;}
+table.sortable tbody tr:hover td {background:#f4f8ee;}
