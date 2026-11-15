@@ -1,0 +1,7 @@
+<% (1..6).each do |gel| %>
+w9_<%= gel %>:
+  id: <%= gel %>
+  material_id: 9
+  gel_no: <%= gel %>
+  weight: <%= 1000 - gel * 100 %>
+<% end %>

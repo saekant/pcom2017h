@@ -1,3 +1,5 @@
-class Organism < ActiveRecord::Base
- has_many :materials
+class Organism < ApplicationRecord
+  ARABIDOPSIS = 1
+
+  has_many :materials, -> { order(:id) }
 end

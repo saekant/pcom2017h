@@ -1,0 +1,3 @@
+# PCoM-DB: search engines may index the public pages.
+User-agent: *
+Allow: /

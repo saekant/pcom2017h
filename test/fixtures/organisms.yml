@@ -1,0 +1,6 @@
+arabidopsis:
+  id: 1
+  organism_name: Arabidopsis thaliana
+synechocystis:
+  id: 2
+  organism_name: Synechosystis sp. PCC6803

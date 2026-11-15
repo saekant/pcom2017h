@@ -1,0 +1,25 @@
+glu1:
+  id: 1
+  gene_id: AT5G04140
+  search_gene_id: at5g04140
+  organism: 1
+  symbols: "GLU1#FD-GOGAT"
+  description: glutamate synthase 1
+  weight: 176000
+psbo:
+  id: 2
+  gene_id: AT5G66570
+  search_gene_id: at5g66570
+  organism: 1
+  symbols: PSBO1
+  description: PS II oxygen-evolving complex 1
+  weight: 35000
+sll1499:
+  id: 3
+  gene_id: sll1499
+  search_gene_id: sll1499
+  organism: 2
+  symbols: glsF
+  description: ferredoxin-dependent glutamate synthase
+  weight: 168000
+  arabi_gene_id: AT5G04140

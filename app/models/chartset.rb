@@ -1,4 +1,2 @@
-class Chartset
-      include ActiveModel::Model
-      attr_accessor :gene_id,:xlist,:ylist
-  end
+# One line of the migration-profile chart.
+Chartset = Data.define(:gene_id, :xlist, :ylist)

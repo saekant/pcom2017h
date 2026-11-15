@@ -1,0 +1,59 @@
+# Automatic checks for PCoM-DB.
+# Runs on every pull request, on every push to master (Heroku waits for this
+# before deploying when "Wait for CI to pass" is enabled), once a month, and by hand.
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [ master ]
+  schedule:
+    - cron: "17 0 1 * *"   # 1st of every month, 09:17 JST: catch newly published vulnerabilities
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  security:
+    name: Security checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true   # Ruby version comes from .ruby-version
+
+      - name: Brakeman (code analysis)
+        run: bundle exec brakeman --quiet --no-pager --exit-on-warn --exit-on-error
+
+      - name: bundler-audit (known vulnerabilities in gems)
+        run: bin/bundler-audit check --update
+
+  test:
+    name: Tests
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_PASSWORD: postgres
+        ports: [ "5432:5432" ]
+        options: >-
+          --health-cmd pg_isready --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      RAILS_ENV: test
+      TEST_DATABASE_URL: postgres://postgres:postgres@localhost:5432/pcomdb_test
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Create the test database (an empty copy of the schema)
+        run: bin/rails db:create db:schema:load
+
+      - name: Run tests
+        run: bin/rails test
