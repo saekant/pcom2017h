@@ -1,3 +1,3 @@
-class Materialweight < ActiveRecord::Base
+class Materialweight < ApplicationRecord
   belongs_to :material
 end

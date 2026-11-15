@@ -1,0 +1,10 @@
+chloroplast:
+  id: 3
+  organism_id: 1
+  material_name: chloroplast
+  grid_disp: "60"
+pcc6803:
+  id: 9
+  organism_id: 2
+  material_name: whole cells
+  grid_disp: "60"

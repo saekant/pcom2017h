@@ -1,0 +1,19 @@
+<div id="controls">
+  <div id="perpage">
+    <select id="perpage_select">
+      <option value="10">10</option>
+      <option value="20" selected="selected">20</option>
+      <option value="50">50</option>
+      <option value="100">100</option>
+      <option value="200">200</option>
+    </select>
+    <span>Entries Per Page</span>
+  </div>
+  <div id="navigation">
+    <%= image_tag "sorter/first.gif", width: 16, height: 16, alt: "First Page", data: { page_move: -1, page_end: "" } %>
+    <%= image_tag "sorter/previous.gif", width: 16, height: 16, alt: "Previous Page", data: { page_move: -1 } %>
+    <%= image_tag "sorter/next.gif", width: 16, height: 16, alt: "Next Page", data: { page_move: 1 } %>
+    <%= image_tag "sorter/last.gif", width: 16, height: 16, alt: "Last Page", data: { page_move: 1, page_end: "" } %>
+  </div>
+  <div id="text">Displaying Page <span id="currentpage"></span> of <span id="pagelimit"></span></div>
+</div>

@@ -1,214 +1,14 @@
 /*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
- * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the top of the
- * compiled file, but it's generally better to create a new file per style scope.
- *
-
-
-
-
+ * PCoM-DB stylesheet.
+ * Ported from the original site (2023). Image paths are now resolved by the asset
+ * pipeline, so the background images display correctly again.
  */
-
-/* Preload images */
-body:after {
-  /*content: url(../img/close.png) url(../img/loading.gif) url(../img/prev.png) url(../img/next.png);*/
-  content: url(/assets/img/close.png) url(/assets/img/loading.gif) url(/assets/img/prev.png) url(/assets/img/next.png);
-  display: none; }
-
-.lightboxOverlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 9999;
-  background-color: black;
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
-  opacity: 0.8;
-  display: none; }
-
-.lightbox {
-  position: absolute;
-  left: 0;
-  width: 100%;
-  z-index: 10000;
-  text-align: center;
-  line-height: 0;
-  font-weight: normal; }
-
-.lightbox .lb-image {
-  display: block;
-  height: auto;
-  max-width: inherit;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  -ms-border-radius: 3px;
-  -o-border-radius: 3px;
-  border-radius: 3px; }
-
-.lightbox a img {
-  border: none; }
-
-.lb-outerContainer {
-  position: relative;
-  background-color: white;
-  *zoom: 1;
-  width: 250px;
-  height: 250px;
-  margin: 0 auto;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  -ms-border-radius: 4px;
-  -o-border-radius: 4px;
-  border-radius: 4px; }
-
-.lb-outerContainer:after {
-  content: "";
-  display: table;
-  clear: both; }
-
-.lb-container {
-  padding: 4px; }
-
-.lb-loader {
-  position: absolute;
-  top: 43%;
-  left: 0;
-  height: 25%;
-  width: 100%;
-  text-align: center;
-  line-height: 0; }
-
-.lb-cancel {
-  display: block;
-  width: 32px;
-  height: 32px;
-  margin: 0 auto;
-  /*background: url(../img/loading.gif) no-repeat;*/
-  background: url(/assets/img/loading.gif) no-repeat; }
-
-.lb-nav {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  z-index: 10; }
-
-.lb-container > .nav {
-  left: 0; }
-
-.lb-nav a {
-  outline: none;
-  background-image: url("data:image/gif;base64,R0lGODlhAQABAPAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="); }
-
-.lb-prev, .lb-next {
-  height: 100%;
-  cursor: pointer;
-  display: block; }
-
-.lb-nav a.lb-prev {
-  width: 34%;
-  left: 0;
-  float: left;
-  /*background: url(../img/prev.png) left 48% no-repeat;*/
-  background: url(/assets/img/prev.png) left 48% no-repeat;
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
-  opacity: 0;
-  -webkit-transition: opacity 0.6s;
-  -moz-transition: opacity 0.6s;
-  -o-transition: opacity 0.6s;
-  transition: opacity 0.6s; }
-
-.lb-nav a.lb-prev:hover {
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
-  opacity: 1; }
-
-.lb-nav a.lb-next {
-  width: 64%;
-  right: 0;
-  float: right;
-  /*background: url(../img/next.png) right 48% no-repeat;*/
-  background: url(/assets/img/next.png) right 48% no-repeat;
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
-  opacity: 0;
-  -webkit-transition: opacity 0.6s;
-  -moz-transition: opacity 0.6s;
-  -o-transition: opacity 0.6s;
-  transition: opacity 0.6s; }
-
-.lb-nav a.lb-next:hover {
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
-  opacity: 1; }
-
-.lb-dataContainer {
-  margin: 0 auto;
-  padding-top: 5px;
-  *zoom: 1;
-  width: 100%;
-  -moz-border-radius-bottomleft: 4px;
-  -webkit-border-bottom-left-radius: 4px;
-  border-bottom-left-radius: 4px;
-  -moz-border-radius-bottomright: 4px;
-  -webkit-border-bottom-right-radius: 4px;
-  border-bottom-right-radius: 4px; }
-
-.lb-dataContainer:after {
-  content: "";
-  display: table;
-  clear: both; }
-
-.lb-data {
-  padding: 0 4px;
-  color: #ccc; }
-
-.lb-data .lb-details {
-  width: 85%;
-  float: left;
-  text-align: left;
-  line-height: 1.1em; }
-
-.lb-data .lb-caption {
-  font-size: 13px;
-  font-weight: bold;
-  line-height: 1em; }
-
-.lb-data .lb-number {
-  display: block;
-  clear: left;
-  padding-bottom: 1em;
-  font-size: 12px;
-  color: #999999; }
-
-.lb-data .lb-close {
-  display: block;
-  float: right;
-  width: 30px;
-  height: 30px;
-  /*background: url(../img/close.png) top right no-repeat;*/
-  background: url(/assets/img/close.png) top right no-repeat;
-  text-align: right;
-  outline: none;
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
-  opacity: 0.7;
-  -webkit-transition: opacity 0.2s;
-  -moz-transition: opacity 0.2s;
-  -o-transition: opacity 0.2s;
-  transition: opacity 0.2s; }
-
-.lb-data .lb-close:hover {
-  cursor: pointer;
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
-  opacity: 1; }
 /* ==================== body ==================== */
 
 * {margin:0; padding:0; outline:none}
 *{ margin:0;padding:0;list-style-type:none;outline:none}
 
-#body_top {	font-family: "Trebuchet MS",Verdana,Helvetica,Arial,sans-serif;font-size: x-small;line-height: 18px;color:#505050;background-image: url(/assets/PPCMD1.png);background-repeat: no-repeat;background-position: right top;background-position: 100％ 0％;background-attachment: fixed;}
+#body_top {	font-family: "Trebuchet MS",Verdana,Helvetica,Arial,sans-serif;font-size: x-small;line-height: 18px;color:#505050;background-image: url("PPCMD1.png");background-repeat: no-repeat;background-position: right top;background-attachment: fixed;}
 #body_normal {	font-family: "Trebuchet MS",Verdana,Helvetica,Arial,sans-serif;font-size: x-small;line-height: 18px;color:#505050;}
 p, ol, ul {font-family: Verdana, Helvetica,Arial,sans-serif;font-size:   13px;line-height: 18px;}
 /* ==================== layout ==================== */
@@ -218,7 +18,7 @@ p, ol, ul {font-family: Verdana, Helvetica,Arial,sans-serif;font-size:   13px;li
 #header_top			{	width: auto;height: 190px;}
 #header_normal	{	width: auto;height: 50px;}
 #header_inner	{		padding: 10px;position:relative; z-index: 3;}
-#header h1		{	background:url(/assets/yuki.gif);}
+#header h1		{	background:url("yuki.gif");}
 #header h2		{	margin: 0;margin-top: 10px;font-size: 4em;font-family: "Trebuchet MS",Verdana, Helvetica, sans-serif;background-color: transparent;color:#505050}
 #header h3		{	margin: 0;font-size: 2em;font-family: "Trebuchet MS",Verdana, Helvetica, sans-serif;background-color: transparent;color:#505050}
 #header h4		{	margin: 0;font-size: 15px;font-family: "Trebuchet MS",Verdana, Helvetica, sans-serif;background-color: transparent;color:#505050}
@@ -237,26 +37,23 @@ p, ol, ul {font-family: Verdana, Helvetica,Arial,sans-serif;font-size:   13px;li
 #footer		{	width: auto;border-top: solid 5px #6aa512;padding-top: 10px;padding-bottom: 20px;margin-right:10px;margin-left:10px;}
 #footer p	{	color: #000000;font-size: x-small;font-family: "Trebuchet MS",Verdana, Helvetica, sans-serif;margin: 0;}
 
-/* ==================== menu ==================== */
-ul.menu li{float:left;width:192px;height:28px;background:url(/assets/btn1.png);position:relative;font-size:small;z-index: 2; }
-* html ul.menu li{display:inline;zoom:1;z-index: 2;}
-*+html ul.menu li{display:inline;zoom:1;z-index: 2;}
-ul.menu li a{display:block;width:100%;height:100%;font-size: 0.9em;line-height:26px;text-indent:24px;font-weight:bold;color:#CFDFB5;text-decoration:none;font-family: "Trebuchet MS", Arial, sans-serif;position:relative;z-index: 2;}
-ul.menu li a:hover{background:url(/assets/btn_over1.png);z-index: 2;}
-ul.sub{display:none;z-index: 2;}
-* html ul.sub{zoom:1;position:relative;z-index: 2;}
-*+html ul.sub{zoom:1;position:relative;z-index: 2;}
-ul.sub li{float:none;z-index: 2;}
-ul.sub li ul.sub{position:absolute;left:192px;top:0;z-index: 2;}
-ul.menu		{zoom:1;
-//add
-				line-height:26px;text-indent:24px;font-weight:bold;font-size: 1em;color:#CFDFB5;text-decoration:none;font-family: "Trebuchet MS", Arial, sans-serif;position:relative;z-index: 2;
-//add
-			}
-ul.menu:after {height:0;visibility:hidden;content:".";display:block;clear:both;z-index: 2;}
+/* ==================== menu (design C: white with dark green text) ==================== */
+ul.menu {position:relative; z-index:2; border-bottom:2px solid #6a9a1f; font-family:"Trebuchet MS", Arial, sans-serif;}
+ul.menu:after {content:""; display:block; clear:both;}
+ul.menu li {float:left; width:192px; height:28px; position:relative; background:#fff; font-size:small; z-index:2;}
+ul.menu li a {display:block; width:100%; height:100%; box-sizing:border-box; padding-left:24px; line-height:26px;
+  font-size:0.9em; font-weight:bold; color:#3d6b12; text-decoration:none; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+ul.menu li a:hover, ul.menu li a:focus {background:#e8f2d6; color:#2f5410;}
+/* sub menus: first level drops down below the item (several blocks stack, as on the old site),
+   deeper levels open to the right */
+ul.sub {display:none; position:relative; width:192px; background:#fff; border-left:1px solid #cfdcb8; border-right:1px solid #cfdcb8;}
+ul.menu > li > ul.sub:last-child {border-bottom:1px solid #cfdcb8; box-shadow:0 2px 6px rgba(0,0,0,.08);}
+ul.sub li {float:none;}
+ul.sub li ul.sub {position:absolute; left:191px; top:0; border:1px solid #cfdcb8; box-shadow:0 2px 6px rgba(0,0,0,.08);}
+ul.menu li:hover > ul.sub, ul.menu li:focus-within > ul.sub {display:block;}
 
 /* ==================== item/image========================= */
-.itm { margin-top:5px;margin-left:55px;list-style-image: url(/assets/yajirushi_green01.jpg); font-weight:bold;}
+.itm { margin-top:5px;margin-left:55px;list-style-image: url("yajirushi_green01.jpg"); font-weight:bold;}
 .itm2 {width: 50px;margin-left:10px;margin-top:5px;margin-bottom:15px;margin-right:10px;}
 img.overview { width: 280px;margin-left:10px;margin-top:5px;vertical-align: top;}
 img.overview2 { width: 360px;margin-left:10px;margin-top:5px;vertical-align: top;}
@@ -277,12 +74,12 @@ span.widelink {display: block;width: 100%; color:#505050;font-size: small;font-f
 .sortable {width:572px; border:1px solid #dcdcdc; margin:0 auto 15px;}
 .sortable th {background-color:#d3d3d3; text-align:center; color:#505050; border:1px solid #fff; border-right:none}
 .sortable th h3 {font-size:12px; padding:6px 8px 8px;font-family: "Trebuchet MS",Verdana, Helvetica, sans-serif;}
-//.sortable th {background-color:#d3d3d3; text-align:center; color:#505050; border:1px solid #fff; border-right:none;font-size:13px; padding:6px 8px 8px;font-family: "Trebuchet MS",Verdana, Helvetica, sans-serif;font-weight:bold;}
+/* .sortable th {background-color:#d3d3d3; text-align:center; color:#505050; border:1px solid #fff; border-right:none;font-size:13px; padding:6px 8px 8px;font-family: "Trebuchet MS",Verdana, Helvetica, sans-serif;font-weight:bold;} */
 .sortable td {padding:2px 4px 4px; border-bottom:1px solid #dcdcdc; border-right:1px solid #dcdcdc;font-family: Verdana, Helvetica, sans-serif;font-size: small;}
-.sortable .head h3 {background:url(/images/sorter/sort.gif) center no-repeat; cursor:pointer; padding-left:3px}
+.sortable .head h3 {background:url("sorter/sort.gif") center no-repeat; cursor:pointer; padding-left:3px}
 .sortable .desc, .sortable .asc {background-color:#c0c0c0}
-.sortable .desc h3 {background:url(/assets/sorter/desc.gif) 7px center no-repeat; cursor:pointer; padding-left:18px}
-.sortable .asc h3 {background:url(/assets/sorter/asc.gif) 7px  center no-repeat; cursor:pointer; padding-left:18px}
+.sortable .desc h3 {background:url("sorter/desc.gif") 7px center no-repeat; cursor:pointer; padding-left:18px}
+.sortable .asc h3 {background:url("sorter/asc.gif") 7px  center no-repeat; cursor:pointer; padding-left:18px}
 .sortable .head:hover, .sortable .desc:hover, .sortable .asc:hover {color:#fff}
 .sortable .body:hover {background:#ccccff;}
 .sortable .evenrow td {background:#fff}
@@ -302,11 +99,11 @@ span.widelink {display: block;width: 100%; color:#505050;font-size: small;font-f
 
 table.key_table	{margin:10px;padding: 0px;font-size: small;}
 /* ==================== view title ==================== */
-#view h1	{	margin: 10px;margin-top: 50px;padding: 10px;font-size: large;font-family: "Trebuchet MS",Verdana, Helvetica, sans-serif;color:#505050;font-weight:bold;background:url(/assets/a2208.gif);background-repeat: no-repeat;background-position: left bottom}
-#view h2	{	margin: 10px;margin-top: 10px;padding: 10px;font-size: large;font-family: "Trebuchet MS",Verdana, Helvetica, sans-serif;color:#505050;font-weight:bold;background:url(/assets/a2208.gif);background-repeat: no-repeat;background-position: left bottom}
+#view h1	{	margin: 10px;margin-top: 50px;padding: 10px;font-size: large;font-family: "Trebuchet MS",Verdana, Helvetica, sans-serif;color:#505050;font-weight:bold;background:url("a2208.gif");background-repeat: no-repeat;background-position: left bottom}
+#view h2	{	margin: 10px;margin-top: 10px;padding: 10px;font-size: large;font-family: "Trebuchet MS",Verdana, Helvetica, sans-serif;color:#505050;font-weight:bold;background:url("a2208.gif");background-repeat: no-repeat;background-position: left bottom}
 
-#mode_on	{	margin: 10px;margin-top: 50px;padding: 10px;font-size: 0.8em;font-family: "Trebuchet MS",Verdana, Helvetica, sans-serif;color:#ff8080;text-decolation: none; }
-#mode_off	{	margin-left: 10px;margin-top: 50px;font-size: 0.8em;font-family: "Trebuchet MS",Verdana, Helvetica, sans-serif;color:#e0e0e0;text-decolation: none; }
+#mode_on	{	margin: 10px;margin-top: 50px;padding: 10px;font-size: 0.8em;font-family: "Trebuchet MS",Verdana, Helvetica, sans-serif;color:#ff8080;text-decoration: none; }
+#mode_off	{	margin-left: 10px;margin-top: 50px;font-size: 0.8em;font-family: "Trebuchet MS",Verdana, Helvetica, sans-serif;color:#e0e0e0;text-decoration: none; }
 /* ==================== button ==================== */
 input.button1{font-size: small;font-family: "Trebuchet MS",Verdana, Helvetica, sans-serif;	}
 /* ==================== text ==================== */
@@ -390,3 +187,20 @@ table.materials_table td.publication
 									{	background-color:#FFFFFF;width:100px;border-style: solid;border-width: 1px;
 										font-family: "Trebuchet MS",Verdana, Helvetica, sans-serif;font-size: small;margin:10px;padding: 10px;}
 
+/* ==================== additions in the 2026 rebuild ==================== */
+/* BP-1 (64 gel slices) had no colour classes in the original stylesheet */
+table.mas_table td.gel64_level0{background-color:#FFFFFF;width:8px;border-style: solid;border-width: 1px;}
+table.mas_table td.gel64_level1{background-color:#FFC0CB;width:8px;border-style: solid;border-width: 1px;}
+table.mas_table td.gel64_level2{background-color:#FF69B4;width:8px;border-style: solid;border-width: 1px;}
+table.mas_table td.gel64_level3{background-color:#FF0000;width:8px;border-style: solid;border-width: 1px;}
+table.weight_table td.gel64{background-color:#FFFFFF;width:9px;border-style: none;border-width: 1px;font-family: "Trebuchet MS",Verdana, Helvetica, sans-serif;font-size: x-small;}
+
+/* clickable rows in the bar tables */
+tr[data-href] {cursor:pointer;}
+
+/* simple image viewer for the Overview figures (replaces the old Lightbox plugin) */
+.pcom-lightbox {position:fixed; inset:0; z-index:100; display:flex; align-items:center; justify-content:center;
+  background:rgba(0,0,0,.8); cursor:zoom-out;}
+.pcom-lightbox img {max-width:92vw; max-height:90vh; background:#fff; padding:6px; box-shadow:0 4px 20px rgba(0,0,0,.4);}
+.pcom-lightbox button {position:absolute; top:12px; right:16px; font-size:28px; line-height:1; color:#fff;
+  background:none; border:0; cursor:pointer;}

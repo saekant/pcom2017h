@@ -1,31 +1,24 @@
-class Protein < ActiveRecord::Base
-        def symbols_tr
-            if self.symbols!=nil
-        	     return self.symbols.tr('#',',')
-        	else
-        	    return ""
-        	end
-        end
-        def description_tr
-        	if self.description!=nil
-        	     return self.description.tr('#',',')
-        	else
-        	    return ""
-        	end
-        end
-        def arabi_symbols_tr
-         	if self.arabi_symbols!=nil
-        	     return self.arabi_symbols.tr('#',',')
-        	else
-        	    return ""
-        	end
-        end
-        def arabi_description_tr
-        	if self.arabi_description!=nil
-        	     return self.arabi_description.tr('#',',')
-        	else
-        	    return ""
-        	end
+class Protein < ApplicationRecord
+  # Multiple values are stored separated by "#"; they are displayed separated by ",".
+  %i[symbols description arabi_symbols arabi_description].each do |attr|
+    define_method(:"#{attr}_tr") { self[attr].to_s.tr("#", ",") }
+  end
 
-        end
+  def self.search_key(input)
+    # Same normalisation the search form applies in the browser:
+    # lower-case and remove half/full-width spaces.
+    input.to_s.downcase.delete(" 　").strip
+  end
+
+  def self.find_by_search_input(input)
+    key = search_key(input)
+    key.empty? ? nil : find_by(search_gene_id: key)
+  end
+
+  # Proteins whose symbols AND description contain the given words (empty = any).
+  def self.matching(symbols:, description:)
+    where("symbols LIKE ? AND description LIKE ?",
+          "%#{sanitize_sql_like(symbols.to_s)}%",
+          "%#{sanitize_sql_like(description.to_s)}%")
+  end
 end

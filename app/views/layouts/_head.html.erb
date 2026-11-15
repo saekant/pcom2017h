@@ -1,0 +1,8 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title><%= @title.presence || "PCoM" %></title>
+<link rel="icon" href="/favicon.ico">
+<%= csrf_meta_tags %>
+<%= stylesheet_link_tag "application" %>
+<%= yield :head %>
+<%= javascript_include_tag "pcom", defer: true %>

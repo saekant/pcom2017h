@@ -1,40 +1,29 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<title><%= @title? @title :'PCoM' %></title>
-		<link rel="shortcut icon" href="/images/favicon.ico">
-		<%= stylesheet_link_tag "application", media: "all" %>
-		<%= javascript_pack_tag 'application' %>
-		<%= csrf_meta_tag %>
+<head>
+  <%= render "layouts/head" %>
 </head>
-<body id ="body_top">
-<script>
-		$("ul.menu li").hover(function() {
-				$(">ul:not(:animated)",this).slideDown("fast");
-				},
-				function(){$(">ul",this).slideUp("fast");
-		});
-</script>
+<body id="body_top">
 <div id="container">
-<div id="head_top">
-<div id="header">
-<div id="header_inner">
-	<table style="width572px;" >
-		<tr><td><%= image_tag "title.png",:width => '512' %></td></tr>
-		<tr><td align="right"><h6> ver 2.1　last update:2023.06.02 (Bugs fixed.)</h6></td></tr>
-	</table>
-	<br>
-		<%= render 'layouts/menu' %>
-</div>
-</div>
-</div>
+  <div id="head_top">
+    <div id="header">
+      <div id="header_inner">
+        <table style="width: 572px;">
+          <tr><td><%= image_tag "title.png", width: 512, alt: "PCoM-DB" %></td></tr>
+          <tr><td align="right"><h6> ver 2.1　last update:2023.06.02 (Bugs fixed.)</h6></td></tr>
+        </table>
+        <br>
+        <%= render "layouts/menu" %>
+      </div>
+    </div>
+  </div>
 
-<div id="content">
-		<%= yield %>
-</div>
-<div id="foot">
-	<%= render 'layouts/foot' %>
+  <div id="content">
+    <%= yield %>
+  </div>
+  <div id="foot">
+    <%= render "layouts/foot" %>
+  </div>
 </div>
 </body>
 </html>

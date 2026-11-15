@@ -1,29 +1,39 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-    get '/proteins/top' => 'proteins#top'
-    get '/proteins/overview' => 'proteins#overview'
-    get '/proteins/list_protein' => 'proteins#list_protein'
-    get '/proteins/help' => 'proteins#help'
-    get '/proteins/resources' => 'proteins#resources'
-    get '/proteins/aboutus' => 'proteins#aboutus'
-    get '/proteins/key_protein' => 'proteins#key_protein'
-    #get '/proteins/key_protein' => 'proteins#search_protein'
-    #get '/proteins/key_protein' => 'proteins#search_material_protein'
-    #post  '/proteins/key_protein' =>'proteins#search_list_protein_by_symbols_or_description'
-    post  '/proteins/search_key_form_by_gene_id' =>'proteins#search_protein'
-    post  '/proteins/search_key_form_by_symbols_or_description' =>'proteins#search_material_protein'
-    post  '/proteins/search_protein' =>'proteins#search_protein'
-    #post  '/proteins/search_protein' =>'proteins#search_material_protein'
-    get '/proteins/help_geneId'=>'proteins#help_geneId'
-   get '/proteins/key_proteins' => 'proteins#key_proteins'
-    #get '/proteins/key_proteins' => 'proteins#search_gene_list'
-    post '/proteins/key_proteins' => 'proteins#search_gene_list'
-   #get '/proteins/search_list_protein_by_gene_id' => 'proteins#search_list_protein_by_gene_id'
-   #get '/proteins/search_list_protein_by_symbols_or_description' => 'proteins#search_list_protein_by_symbols_or_description'
-   post '/proteins/search_list_protein_by_gene_id' => 'proteins#search_list_protein_by_gene_id'
-   post '/proteins/search_list_protein_by_symbols_or_description' => 'proteins#search_list_protein_by_symbols_or_description'
-   get '/proteins/getchart' => 'proteins#getchart'
-   get '/proteins/getchartslist' => 'proteins#getchartslist'
-   post '/proteins/getchartlist' => 'proteins#getchartlist'
-   post '/proteins/getchartslist' => 'proteins#getchartslist'
+  # The site's front page.
+  root to: redirect("/proteins/top")
+
+  # Health check for the hosting platform (returns 200 when the app boots).
+  get "up" => "rails/health#show", as: :rails_health_check
+
+  # All URLs below are the same as on the original site, so existing links keep working.
+  scope "/proteins", controller: :proteins do
+    get :top
+    get :overview
+    get :help
+    get :resources
+    get :aboutus
+    get :help_geneId
+
+    # Browse a sample
+    get  :list_protein
+    post :search_list_protein_by_gene_id
+    post :search_list_protein_by_symbols_or_description
+
+    # Migration-profile chart
+    get  :getchart
+    post :getchartlist
+    get  :getchartslist
+    post :getchartslist
+
+    # Single protein search
+    get  :key_protein
+    get  :search_protein
+    post :search_protein
+    post :search_key_form_by_gene_id, action: :search_protein
+    post :search_key_form_by_symbols_or_description, action: :search_material_protein
+
+    # Multiple protein search
+    get  :key_proteins
+    post :key_proteins, action: :search_gene_list
+  end
 end

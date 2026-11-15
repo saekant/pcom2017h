@@ -1,0 +1,2 @@
+<%# One coloured cell per gel slice. css: e.g. "gel60" -> classes gel60_level0..3 %>
+<% levels.each do |level| %><td class="<%= css %>_level<%= level %>"></td><% end %>
