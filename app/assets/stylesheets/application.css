@@ -206,6 +206,11 @@ tr[data-href] {cursor:pointer;}
   background:none; border:0; cursor:pointer;}
 
 /* ==================== links (design C, 2026) ==================== */
+/* Body text links on every page: quiet green instead of the browser's default blue.
+   (Menu, gene ID and sample name links have their own, more specific rules.) */
+a:link, a:visited {color:#5d7f2f; text-decoration:none;}
+a:hover, a:focus {color:#2f5410; text-decoration:underline; text-underline-offset:3px;}
+
 /* External database links under the chart title: small, quiet, marked with an arrow */
 #view h1 .ext-links {margin-top:6px; font-family:"Trebuchet MS",Verdana,Helvetica,sans-serif; font-size:11px; font-weight:normal; color:#8aa66a;}
 #view h1 .ext-links a {color:#5d7f2f; text-decoration:none;}
