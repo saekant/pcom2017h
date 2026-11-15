@@ -10,7 +10,7 @@ LC-MS/MS) so that protein complexes containing a protein of interest can be pred
 
 | | |
 |---|---|
-| Framework | Ruby on Rails 8.1 (Ruby 3.3) |
+| Framework | Ruby on Rails 8.1 (Ruby 3.4) |
 | Database | PostgreSQL (Heroku Postgres) – existing tables, no migrations are run |
 | Hosting | Heroku (deploys automatically from `master`) |
 | Front end | Plain CSS + a small vanilla JavaScript file (`app/assets/javascripts/pcom.js`) |

@@ -121,7 +121,9 @@ class ProteinsController < ApplicationController
 
     @homolog_gene_ids = {}
     if @arabi_homolog_flg
-      Protein.where(arabi_gene_id: @protein.gene_id).order(:id).each do |homolog|
+      # When a sample has several homologs, the original site showed the last one in
+      # table order (no ORDER BY); this is kept as is so results stay identical.
+      Protein.where(arabi_gene_id: @protein.gene_id).each do |homolog|
         materials_with_data(homolog.gene_id).each do |material_id|
           keys[material_id] = homolog.gene_id
           @homolog_gene_ids[material_id] = homolog.gene_id
