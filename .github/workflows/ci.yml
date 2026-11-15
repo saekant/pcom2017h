@@ -57,3 +57,27 @@ jobs:
 
       - name: Run tests
         run: bin/rails test
+
+  # Heroku's "Wait for GitHub checks to pass before deploy" looks at commit *statuses*.
+  # GitHub Actions only records *check runs*, and a commit with no statuses counts as
+  # "pending", so Heroku would wait forever. This job writes one commit status with
+  # the overall result of the jobs above.
+  report-status:
+    name: Report status for Heroku
+    needs: [ security, test ]
+    if: always()
+    runs-on: ubuntu-latest
+    permissions:
+      statuses: write
+    steps:
+      - name: Set commit status
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          STATE: ${{ (needs.security.result == 'success' && needs.test.result == 'success') && 'success' || 'failure' }}
+        run: |
+          gh api "repos/${{ github.repository }}/statuses/$SHA" \
+            -f state="$STATE" \
+            -f context="ci/pcomdb" \
+            -f description="Tests and security checks: $STATE" \
+            -f target_url="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"

@@ -171,6 +171,24 @@ Ruby 3.3（サポートは2027年3月まで）から 3.4.12（2028年3月まで�
 - Heroku の「Wait for CI to pass before deploy」を有効にすると、CI が成功した変更だけがデプロイされる。
 - 同梱している Highcharts（`vendor/assets/javascripts/highcharts.js`）は Dependabot の対象外。年1回程度、手動で更新を確認する。
 
-## 12. 今後の予定
+## 12. 本番への切り替え（第6段階）
+
+1. Heroku の「Wait for GitHub checks to pass before deploy」を有効化
+2. Config Vars に `SECRET_KEY_BASE` を新規登録（旧アプリはリポジトリ内の `master.key` を使っていたため、設定が無かった）
+3. スタックは heroku-22（Ruby 3.4.12 対応済み）。heroku-22 は2027年中に提供終了の見込みなので、後日 heroku-24 へ移行予定
+4. DB には変更がないため、作業前に取ったバックアップで十分と判断
+5. プルリクエスト #1 を `master` にマージ → CI 成功 → **自動デプロイが始まらず**、Heroku の「Deploy Branch」で手動デプロイ
+6. 本番で確認：セキュリティヘッダ、404 処理、一覧・グラフ・点クリック・検索・画像表示・メニュー、ブラウザエラー0件。
+   slr0338 のグラフが正しい位置（gel 45）に表示されることも確認
+
+### 自動デプロイが始まらなかった原因
+
+- Heroku の GitHub 連携自体は正常（手動デプロイ時に GitHub の Deployments へ記録が残っていた）。
+- 「Wait for GitHub checks」は、コミットの**コミットステータス**がすべて `success` になるのを待つ。
+- GitHub Actions は結果を**チェック（check run）**として記録し、コミットステータスは作らない。
+- コミットステータスが1件も無いコミットは、GitHub 上で `pending` 扱いになる → Heroku は待ち続けた。
+- 対策：CI の最後に、全ジョブの結果をコミットステータス（`ci/pcomdb`）として書き込むジョブを追加。
+
+## 13. 今後の予定
 
 - 本番への切り替え（バックアップ取得後、`master` へのマージで自動デプロイ）
